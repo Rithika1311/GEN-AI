@@ -1,0 +1,98 @@
+[
+  {
+    "id": 1,
+    "question": "How does the Raft consensus algorithm handle leader election?",
+    "target_page": 1,
+    "expected_answer": "Raft uses randomized election timers. When a follower node does not hear heartbeats from a leader within its randomized timeout period, it transitions to candidate state, increments its term, votes for itself, and broadcasts RequestVote RPCs."
+  },
+  {
+    "id": 2,
+    "question": "What mechanism prevents split-vote scenarios during Raft leader elections?",
+    "target_page": 1,
+    "expected_answer": "Randomized election timeouts between 150ms and 300ms ensure that votes are rarely split evenly among multiple candidates simultaneously."
+  },
+  {
+    "id": 3,
+    "question": "How does log replication work in a Raft cluster?",
+    "target_page": 1,
+    "expected_answer": "The elected leader receives client commands, appends them to its local log, sends AppendEntries RPCs to follower nodes, and commits the entry once a majority of nodes acknowledge it."
+  },
+  {
+    "id": 4,
+    "question": "What is the primary difference in write behavior between B-trees and LSM-trees?",
+    "target_page": 2,
+    "expected_answer": "B-trees perform in-place random updates by rewriting fixed-size disk blocks, whereas LSM-trees buffer writes in an in-memory MemTable and append sequential SSTables to disk, converting random writes into sequential disk operations."
+  },
+  {
+    "id": 5,
+    "question": "Why are Bloom filters used in LSM-tree storage engines?",
+    "target_page": 2,
+    "expected_answer": "Bloom filters are probabilistic data structures that quickly verify if a key definitely does not exist in an SSTable, preventing costly disk reads for missing keys."
+  },
+  {
+    "id": 6,
+    "question": "What causes write amplification in Log-Structured Merge trees?",
+    "target_page": 2,
+    "expected_answer": "Write amplification is caused by compaction processes that continuously read existing SSTables, merge and sort entries, and rewrite them to subsequent levels on disk."
+  },
+  {
+    "id": 7,
+    "question": "What are the two phases of the Two-Phase Commit protocol?",
+    "target_page": 3,
+    "expected_answer": "The two phases are the Prepare Phase (coordinator queries participants if they can commit) and the Commit Phase (coordinator commits if all voted yes, or aborts if any voted no)."
+  },
+  {
+    "id": 8,
+    "question": "How does Google Spanner mitigate clock skew in distributed transactions?",
+    "target_page": 3,
+    "expected_answer": "Google Spanner uses TrueTime API backed by atomic clocks and GPS receivers to provide a bounded uncertainty interval [earliest, latest] and waits out clock uncertainty before committing transactions."
+  },
+  {
+    "id": 9,
+    "question": "What is the difference between Strict Serializability and Snapshot Isolation?",
+    "target_page": 3,
+    "expected_answer": "Strict Serializability enforces external consistency matching real-time order without anomalies, whereas Snapshot Isolation allows transactions to read from a consistent snapshot but is vulnerable to write skew anomalies."
+  },
+  {
+    "id": 10,
+    "question": "What is the difference between write-through and write-back caching?",
+    "target_page": 4,
+    "expected_answer": "Write-through caching synchronously writes data to both the cache and underlying database before confirming success, while write-back caching writes only to cache initially and asynchronously writes to disk later."
+  },
+  {
+    "id": 11,
+    "question": "How can systems protect against cache stampede or thundering herd problems?",
+    "target_page": 4,
+    "expected_answer": "Systems use distributed mutex locking, probabilistic early cache recomputation (XFetch), or background refresh threads to ensure only one worker recomputes the expired cache entry."
+  },
+  {
+    "id": 12,
+    "question": "What condition must read and write quorums satisfy in Dynamo-style replication?",
+    "target_page": 4,
+    "expected_answer": "The quorum condition R + W > N must be satisfied, ensuring that the set of nodes read and the set of nodes written overlap on at least one up-to-date replica node."
+  },
+  {
+    "id": 13,
+    "question": "How does sloppy quorum differ from strict quorum replication?",
+    "target_page": 4,
+    "expected_answer": "In a sloppy quorum, if designated primary replica nodes are unreachable during a network partition, writes are temporarily accepted by healthy alternate nodes using hinted handoff."
+  },
+  {
+    "id": 14,
+    "question": "How does HTTP/3 with QUIC eliminate TCP head-of-line blocking?",
+    "target_page": 5,
+    "expected_answer": "QUIC operates over UDP and implements independent transport streams so that a lost packet on one stream only pauses that individual stream without stalling other concurrent streams."
+  },
+  {
+    "id": 15,
+    "question": "What are the three states in a standard circuit breaker pattern?",
+    "target_page": 5,
+    "expected_answer": "The three states are Closed (normal operation), Open (tripped upon repeated failures, immediately rejecting calls), and Half-Open (allows trial requests through to test service recovery)."
+  },
+  {
+    "id": 16,
+    "question": "Why is jitter added to exponential backoff algorithms in distributed networks?",
+    "target_page": 5,
+    "expected_answer": "Jitter introduces random variation into retry sleep intervals, desynchronizing concurrent clients and preventing synchronized retry stampedes against degraded backend servers."
+  }
+]

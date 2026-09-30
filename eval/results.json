@@ -1,0 +1,33 @@
+{
+  "best_chunk_size": 1200,
+  "total_questions": 16,
+  "metrics": [
+    {
+      "chunk_size": 500,
+      "chunk_overlap": 100,
+      "chunk_count": 32,
+      "hit_at_1": 100.0,
+      "hit_rate": 100.0,
+      "mrr": 1.0,
+      "avg_latency_ms": 19.28
+    },
+    {
+      "chunk_size": 800,
+      "chunk_overlap": 150,
+      "chunk_count": 22,
+      "hit_at_1": 100.0,
+      "hit_rate": 100.0,
+      "mrr": 1.0,
+      "avg_latency_ms": 19.51
+    },
+    {
+      "chunk_size": 1200,
+      "chunk_overlap": 200,
+      "chunk_count": 15,
+      "hit_at_1": 100.0,
+      "hit_rate": 100.0,
+      "mrr": 1.0,
+      "avg_latency_ms": 16.44
+    }
+  ]
+}
