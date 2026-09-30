@@ -9,6 +9,7 @@ ENV_PATH = BASE_DIR / ".env"
 
 class Settings(BaseSettings):
     gemini_api_key: str = ""
+    gemini_model: str = "gemini-3.8-flash"
     embedding_model_name: str = "all-MiniLM-L6-v2"
     data_dir: str = str(BASE_DIR / "data")
     vector_store_path: str = str(BASE_DIR / "data" / "faiss_index")

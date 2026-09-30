@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.config import settings
 from app.models.schemas import HealthResponse
 from app.routers.documents import router as documents_router
+from app.routers.chat import router as chat_router
 
 app = FastAPI(
     title="DocuMind API",
@@ -21,6 +22,7 @@ app.add_middleware(
 )
 
 app.include_router(documents_router)
+app.include_router(chat_router)
 
 
 @app.get("/api/health", response_model=HealthResponse)
