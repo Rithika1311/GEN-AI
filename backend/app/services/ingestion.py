@@ -1,6 +1,7 @@
 import io
 import re
 from typing import List, Tuple
+from fastapi import HTTPException
 from pypdf import PdfReader
 from langchain_core.documents import Document
 from langchain_text_splitters import RecursiveCharacterTextSplitter
@@ -20,14 +21,20 @@ def clean_text(text: str) -> str:
 
 def parse_pdf_pages(file_bytes: bytes) -> List[Tuple[int, str]]:
     # Extract text page-by-page preserving 1-based page numbers
-    reader = PdfReader(io.BytesIO(file_bytes))
-    pages: List[Tuple[int, str]] = []
-    for idx, page in enumerate(reader.pages):
-        page_number = idx + 1
-        raw_text = page.extract_text() or ""
-        cleaned = clean_text(raw_text)
-        pages.append((page_number, cleaned))
-    return pages
+    try:
+        reader = PdfReader(io.BytesIO(file_bytes))
+        pages: List[Tuple[int, str]] = []
+        for idx, page in enumerate(reader.pages):
+            page_number = idx + 1
+            raw_text = page.extract_text() or ""
+            cleaned = clean_text(raw_text)
+            pages.append((page_number, cleaned))
+        return pages
+    except Exception as e:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Unable to parse PDF content: {str(e)}"
+        )
 
 
 def chunk_document_pages(

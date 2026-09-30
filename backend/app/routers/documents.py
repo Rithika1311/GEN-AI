@@ -95,4 +95,4 @@ def delete_document(document_id: str):
         )
 
     delete_document_vectors(document_id)
-    return {"message": "Document deleted successfully", "id": document_id}
+    return {"deleted": True, "id": document_id, "message": "Document deleted successfully"}
